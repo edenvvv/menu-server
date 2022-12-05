@@ -89,18 +89,6 @@ def dessert_id(id):
         return "Not found"
 
 
-@app.route("/order/", defaults={"drinks": None, "pizzas": None, "desserts": None}, methods=["POST"])
-def order(drinks, pizzas, desserts):
-    price = 0
-    for i, j, k in zip(drinks, pizzas, desserts):
-        price += int(json.loads(get_specific("Drinks", i))["dishPrice"])
-        price += int(json.loads(get_specific("Pizzas", j))["dishPrice"])
-        price += int(json.loads(get_specific("Desserts", k))["dishPrice"])
-    result = {
-        'price': price
-    }
-    return json.dumps(result)
-
 
 if __name__ == "__main__":
     app.run(debug=True)
